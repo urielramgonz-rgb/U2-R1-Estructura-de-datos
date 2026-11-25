@@ -12,8 +12,20 @@ public class ListaEnlazada<T> {
 
  
     //1. agregarInicio(T dato)
-	Inserta al principio
-	Uriel Ramírez
+public void agregarInicio(T dato) {
+
+        //Crea el nuevo nodo con el dato.
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        //Hace que el nuevo nodo apunte a la cabeza.
+        nuevo.setSiguiente(cabeza);
+
+        //Y ahora la cabeza sera el nuevo nodo.
+        cabeza = nuevo;
+
+        //Lleva un contador del tamaño de la lita y lo incrementa.
+        tamaño++;
+    }
 
 	//2. agregarFinal(T dato)
     public void agregarFinal(T dato) {
@@ -58,8 +70,26 @@ public class ListaEnlazada<T> {
     }l
 
 	//4. eliminarInicio()
-	Elimina y devuelve el primero
-	Uriel Ramírez
+public T eliminarInicio() {
+
+    //Comprueba si la lista esta vacia.
+    if (cabeza == null) {
+		//Si esta vacia Lanza una excepcion termina el metodo.
+        throw new java.util.NoSuchElementException("La lista está vacía");
+    }
+
+    //Guarda el primer dato de la lisa antes de eliminarlo para despues devolderlo.
+    T dato = cabeza.getDato();
+
+    //Actualiza la cabeza al siguiente nodo y asi se elimina el primero.
+    cabeza = cabeza.getSiguiente();
+
+    //Disminuye el tamaño de la lista en el contador.
+    tamaño--;
+
+    //REgresa el dato eliminado.
+    return dato;
+}
 
 	//5. eliminarFinal()
  public T eliminarFinal() {
@@ -117,8 +147,28 @@ public boolean eliminar(T dato) {
     }
 
 	//7. obtener(int pos)
-	Devuelve el elemento en la posición
-	Uriel Ramírez
+public T obtener(int pos) {
+
+    	//Primero verifica que la posicion que se desea obtener este dentro del rango de la lista.
+    	if (pos < 0 || pos >= tamaño) {
+
+        //Si la posicion no existe lanza una excepcion y termina el metodo.
+        	throw new IndexOutOfBoundsException("No existe esa posicion en la lista");
+    	}
+
+    	//Crea una referencia para que "actual comience en la cabeza".
+    	Nodo<T> actual = cabeza;
+
+    	//Recorre la lista hasta llegar a la posicion que se necesita.
+    	for (int i = 0; i < pos; i++) {
+
+        	//En cada recorrido avanza una posicion de la lista si es que aun no llega a la posicion solicitada.
+        	actual = actual.getSiguiente();
+    	}
+
+    	//Cuando encuentra la posicion solicitada la devuelve.
+    	return actual.getDato();
+	}
 
 	//8. buscar(T dato)
     public int buscar(T dato) {
