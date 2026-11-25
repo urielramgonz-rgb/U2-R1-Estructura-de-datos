@@ -9,4 +9,4 @@ Metodo eliminar Inicio
 
 Metodo Obtener
 
-<img width="587" height="730" alt="image" src="https://github.com/user-attachments/assets/649a1b84-7deb-45a3-809b-9aef15c0bb89" />
+<img width="1232" height="1601" alt="image" src="https://github.com/user-attachments/assets/4b74a8b6-cf25-4931-af2c-d7a50a3d2b41" />
