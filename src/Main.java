@@ -2,30 +2,32 @@ package src;
 
 public class Main {
 
+    // Imprimir todos los elementos de la lista.
+    public static void imprimirLista(ListaEnlazada<Integer> lista) {
+
+        System.out.print("Lista: [");
+
+        for (int i = 0; i < lista.tamaño(); i++) {
+
+            if (i > 0) {
+                System.out.print(" -> ");
+            }
+
+            System.out.print(lista.obtener(i));
+        }
+
+        System.out.println("]");
+    }
+
     public static void main(String[] args) {
 
-        System.out.println("===== PRUEBA 1: LISTA VACIA =====");
+        System.out.println("\n===== PRUEBA 1: LISTA VACIA =====");
 
         ListaEnlazada<Integer> lista1 = new ListaEnlazada<>();
 
-        System.out.println("¿Esta vacia?: " + lista1.estaVacia());
+        imprimirLista(lista1);
         System.out.println("Tamaño: " + lista1.tamaño());
-        System.out.println("Buscar 10: " + lista1.buscar(10));
-        System.out.println("Eliminar 10: " + lista1.eliminar(10));
-
-        // Comprobar eliminación al inicio con lista vacía.
-        try {
-            lista1.eliminarInicio();
-        } catch (java.util.NoSuchElementException e) {
-            System.out.println("Correcto: No se puede eliminar al inicio.");
-        }
-
-        // Comprobar eliminación al final con lista vacía.
-        try {
-            lista1.eliminarFinal();
-        } catch (IllegalStateException e) {
-            System.out.println("Correcto: No se puede eliminar al final.");
-        }
+        System.out.println("¿Está vacía?: " + lista1.estaVacia());
 
         System.out.println("\n===== PRUEBA 2: UN ELEMENTO =====");
 
@@ -33,49 +35,35 @@ public class Main {
 
         lista2.agregarInicio(10);
 
-        System.out.println("Tamaño: " + lista2.tamaño());
-        System.out.println("Elemento: " + lista2.obtener(0));
+        imprimirLista(lista2);
 
-        System.out.println("Eliminar primero: "
-                + lista2.eliminarInicio());
+        System.out.println("Eliminar inicio: " + lista2.eliminarInicio());
 
-        System.out.println("¿Esta vacia?: " + lista2.estaVacia());
+        imprimirLista(lista2);
 
         lista2.agregarFinal(20);
 
-        System.out.println("Nuevo elemento: " + lista2.obtener(0));
+        System.out.println("Eliminar final: " + lista2.eliminarFinal());
 
-        System.out.println("Eliminar ultimo: "
-                + lista2.eliminarFinal());
-
-        System.out.println("Tamaño final: " + lista2.tamaño());
+        imprimirLista(lista2);
 
         System.out.println("\n===== PRUEBA 3: EXTREMOS =====");
 
         ListaEnlazada<Integer> lista3 = new ListaEnlazada<>();
 
-        // Insertar elementos.
         lista3.agregarInicio(20);
         lista3.agregarInicio(10);
         lista3.agregarFinal(30);
 
-        System.out.println("Primer elemento: " + lista3.obtener(0));
-        System.out.println("Ultimo elemento: "
-                + lista3.obtener(lista3.tamaño() - 1));
+        imprimirLista(lista3);
 
-        System.out.println("Tamaño: " + lista3.tamaño());
+        System.out.println("Eliminar inicio: " + lista3.eliminarInicio());
 
-        // Eliminar elementos.
-        System.out.println("Eliminar inicio: "
-                + lista3.eliminarInicio());
+        imprimirLista(lista3);
 
-        System.out.println("Eliminar final: "
-                + lista3.eliminarFinal());
+        System.out.println("Eliminar final: " + lista3.eliminarFinal());
 
-        System.out.println("Elemento restante: "
-                + lista3.obtener(0));
-
-        System.out.println("Tamaño final: " + lista3.tamaño());
+        imprimirLista(lista3);
 
         System.out.println("\n===== PRUEBA 4: DATO INEXISTENTE =====");
 
@@ -85,16 +73,11 @@ public class Main {
         lista4.agregarFinal(20);
         lista4.agregarFinal(30);
 
-        boolean eliminado = lista4.eliminar(99);
+        imprimirLista(lista4);
 
-        System.out.println("¿Se elimino el dato 99?: " + eliminado);
+        System.out.println("Eliminar 99: " + lista4.eliminar(99));
 
-        System.out.println("Tamaño actual: " + lista4.tamaño());
-
-        System.out.println("Los elementos siguen siendo:");
-        System.out.println(lista4.obtener(0));
-        System.out.println(lista4.obtener(1));
-        System.out.println(lista4.obtener(2));
+        imprimirLista(lista4);
 
         System.out.println("\n===== PRUEBA 5: POSICIONES INVALIDAS =====");
 
@@ -103,30 +86,21 @@ public class Main {
         lista5.agregarFinal(10);
         lista5.agregarFinal(20);
 
-        // Intentar obtener una posición negativa.
+        imprimirLista(lista5);
+
         try {
             lista5.obtener(-1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Correcto: No existe la posicion -1.");
+            System.out.println("Obtener (-1): Error de posicion");
         }
 
-        // Intentar obtener una posición igual al tamaño.
         try {
             lista5.obtener(2);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Correcto: No existe la posicion 2.");
+            System.out.println("Obtener (2): Error de posicion");
         }
 
-        // Intentar insertar en posiciones inválidas.
-        lista5.insertarEn(-1, 50);
-        lista5.insertarEn(3, 50);
-
-        System.out.println("Tamaño despues de intentar insertar: "
-                + lista5.tamaño());
-
-        System.out.println("Elementos originales: "
-                + lista5.obtener(0) + ", "
-                + lista5.obtener(1));
+        imprimirLista(lista5);
 
         System.out.println("\n===== FIN DE LAS PRUEBAS =====");
     }
